@@ -13,10 +13,17 @@ def main():
 
 
 def convert_big(string):
-    try:
-        output = int(string[0])
-        print '0|0|0|' + str(output)
-    except ValueError:
+    integer = True
+    for x in string:
+        try:
+            _ = int(x)
+        except ValueError:
+            integer = False
+            break
+    if integer:
+        for x in string:
+            print '0|0|0|' + x
+    else:
         length = len(string[0])
         # closest multiple of 4
         x = 0
@@ -30,10 +37,17 @@ def convert_big(string):
 
 
 def convert_small(string):
-    try:
-        output = int(string[0])
-        print '0|0|0|' + str(output)
-    except ValueError:
+    integer = True
+    for x in string:
+        try:
+            _ = int(x)
+        except ValueError:
+            integer = False
+            break
+    if integer:
+        for x in string:
+            print '0|0|0|' + x
+    else:
         length = len(string[0])
         # closest multiple of 4
         x = 0
