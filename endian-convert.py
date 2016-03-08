@@ -35,32 +35,44 @@ def convert_big(string):
     if is_integer(string):
         handle_integer(string)
     else:
-        length = len(string[0])
-        # closest multiple of 4
-        x = 0
-        while x < length:
-            x = x + 4
-        output = string[0].ljust(x, '0')
-        x = 0
-        while x < length:
-            print '|'.join(output[x:x+4])
-            x = x + 4
+        output = pad_output(string[0])
+        print_output(output)
 
 
 def convert_small(string):
     if is_integer(string):
         handle_integer(string)
     else:
-        length = len(string[0])
-        # closest multiple of 4
-        x = 0
-        while x < length:
-            x = x + 4
-        output = string[0].ljust(x, '0')
-        x = 0
-        while x < length:
-            print '|'.join(reversed(output[x:x+4]))
-            x = x + 4
+        output = pad_output(string[0])
+        print_output(output, big=False)
+
+
+def print_output(input, big=True):
+    length = len(input)
+    x = 0
+    while x < length:
+        if big:
+            print_big_output(input, x)
+        else:
+            print_small_output(input, x)
+        x = x + 4
+
+
+def print_big_output(input, x):
+    print '|'.join(input[x:x+4])
+
+
+def print_small_output(input, x):
+    print '|'.join(reversed(input[x:x+4]))
+
+
+def pad_output(input):
+    length = len(input)
+    # closest multiple of 4
+    x = 0
+    while x < length:
+        x = x + 4
+    return input.ljust(x, '0')
 
 
 
