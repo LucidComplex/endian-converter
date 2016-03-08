@@ -12,7 +12,7 @@ def main():
         convert_small(args)
 
 
-def convert_big(string):
+def is_integer(string):
     integer = True
     for x in string:
         try:
@@ -20,9 +20,20 @@ def convert_big(string):
         except ValueError:
             integer = False
             break
-    if integer:
-        for x in string:
-            print '0|0|0|' + x
+    return integer
+
+def handle_integer(string):
+    for num in string:
+        x = 0
+        binary_string = str(bin(int(num)))[2:].rjust(32, '0')
+        out = []
+        for x in range(0, 32, 8):
+            out.append(str(int(binary_string[x:x+8], 2)))
+        print '|'.join(out)
+
+def convert_big(string):
+    if is_integer(string):
+        handle_integer(string)
     else:
         length = len(string[0])
         # closest multiple of 4
@@ -37,16 +48,8 @@ def convert_big(string):
 
 
 def convert_small(string):
-    integer = True
-    for x in string:
-        try:
-            _ = int(x)
-        except ValueError:
-            integer = False
-            break
-    if integer:
-        for x in string:
-            print '0|0|0|' + x
+    if is_integer(string):
+        handle_integer(string)
     else:
         length = len(string[0])
         # closest multiple of 4
